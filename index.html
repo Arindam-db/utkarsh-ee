@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFest 2025 - Electrical Engineering | Tripura Institute of Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ff6b35 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #f8f9fa, white);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .events h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* IMAGE AREA: keep 16:9 and show full image by default */
+        .event-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;       /* keep 16:9 box */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3c72, #ff6b35); /* fallback / letterbox color */
+        }
+
+        /* Make sure img fills the box but doesn't get cropped by default */
+        .event-image img {
+            width: 100%;
+            height: 130%;
+            object-fit: contain;       
+            transition: transform 0.45s ease; /* smooth zoom for hover */
+            display: block;
+        }
+
+        /* On hover: slight zoom and allow a small crop for animation */
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+            object-fit: cover; /* slight crop during hover to make zoom feel nicer */
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .coordinators {
+            margin-bottom: 1.5rem;
+        }
+
+        .coordinators h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .coordinator-list {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .about h2, .events h2 {
+                font-size: 2.2rem;
+            }
+
+            .about p {
+                font-size: 1.1rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .event-content {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .about, .events {
+                padding: 3rem 1rem;
+            }
+
+            .event-content {
+                padding: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="TechFest Logo" style="width:100%; height:100%; border-radius:50%;">
+            </div>
+            <h1>Techfest 2025</h1>
+            <h2>Tripura Institute of Technology</h2>
+            <h2>Department of Electrical Engineering</h2>
+            <p class="tagline">     </p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about fade-in">
+        <div class="container">
+            <h2>Welcome to Utkarsh V4.0</h2>
+            <p>Join us for an electrifying celebration of innovation and technology! Our annual TechFest brings together brilliant minds to compete, collaborate, and showcase the future of electrical engineering. Experience cutting-edge challenges, network with industry professionals, and be part of something extraordinary.</p>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events fade-in">
+        <div class="container">
+            <h2>Featured Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="images/electrivia.jpeg" alt="Electrivia Event">
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Electrivia</h3>
+                        <p class="event-description">A clue-based scavenger hunt where participants follow hints that lead to subsequent clues. The game tests electrical knowledge, problem-solving, and speed.</p>
+                        <div class="coordinators">
+                            <h4>Coordinators:</h4>
+                            <p class="coordinator-list">Aparna Debnath, Jui Saha, Prabal Nama Das, Hridam Debnath</p>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="images/survival.jpeg" alt="Survival Arena Event">
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Survival Arena</h3>
+                        <p class="event-description">Compete in thrilling strategy and endurance challenges designed to push your limits. Players face elimination rounds where only the smartest and quickest survive.</p>
+                        <div class="coordinators">
+                            <h4>Coordinators:</h4>
+                            <p class="coordinator-list">Swarnabha De, Supratim Sutradhar, Bappi Bardhan, Basundhara Singh</p>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="images/recall.jpeg" alt="Recall Rush Event">
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Recall Rush</h3>
+                        <p class="event-description">A hybrid game combining elements of Simon Says and Whack-a-Mole. Players must quickly recall sequences and respond rapidly to prompts, testing memory and reflexes.</p>
+                        <div class="coordinators">
+                            <h4>Coordinators:</h4>
+                            <p class="coordinator-list">Arindam Deb, Rajat Chakraborty, Ruhit Sinha, Uday Roy</p>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="images/battleground.jpeg" alt="BGMI Tournament Event">
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Battlegrounds Tournament (BGMI)</h3>
+                        <p class="event-description">A squad vs squad battle royale game where teams compete to be the last standing. Emphasizes teamwork, strategy, and combat skills.</p>
+                        <div class="coordinators">
+                            <h4>Coordinators:</h4>
+                            <p class="coordinator-list">Aman Marak, Suhel Tripura, Swapnadeep Sen, Abir Bakshi</p>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Electrical Engineering TechFest | Tripura Institute of Technology</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add stagger animation to event cards when they come into view
+        const eventCards = document.querySelectorAll('.event-card');
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        eventCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+    </script>
+</body>
+</html>

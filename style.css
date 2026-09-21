@@ -1,91 +1,239 @@
+/* ===================================================
+   UTKARSH 5.0 — MEDIEVAL REALM DESIGN SYSTEM
+   Theme: Royal Medieval & Arcane Electrical Engineering
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;800;900&family=Marcellus&family=MedievalSharp&display=swap');
+
+:root {
+    --bg-dark: #0d0f14;
+    --bg-dark-alt: #131722;
+    --bg-card: rgba(22, 26, 38, 0.85);
+    --bg-card-hover: rgba(28, 33, 49, 0.95);
+    --parchment: #f6f1e5;
+    --parchment-dark: #e8dec8;
+    
+    --gold-primary: #d4af37;
+    --gold-light: #f7e7a9;
+    --gold-dark: #9a7821;
+    --gold-gradient: linear-gradient(135deg, #f7e7a9 0%, #d4af37 50%, #9a7821 100%);
+    --gold-glow: 0 0 20px rgba(212, 175, 55, 0.35);
+
+    --electric-blue: #00d2ff;
+    --electric-glow: 0 0 15px rgba(0, 210, 255, 0.4);
+
+    --crimson: #851419;
+    --crimson-gradient: linear-gradient(135deg, #9b1b22 0%, #680d12 100%);
+
+    --text-main: #f5eedb;
+    --text-muted: #b8af9b;
+    --text-dark: #221c13;
+
+    --font-heading: 'Cinzel', serif;
+    --font-decorative: 'Cinzel Decorative', serif;
+    --font-body: 'Marcellus', serif;
+
+    --border-gold: 1px solid rgba(212, 175, 55, 0.35);
+    --border-gold-double: 3px double rgba(212, 175, 55, 0.55);
+}
+
+/* Reset & Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    overflow-x: hidden;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Hero Section */
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-main);
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(0, 210, 255, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(133, 20, 25, 0.08) 0%, transparent 50%),
+        linear-gradient(to bottom, #090b0f, #0d0f14 40%, #0f121a 100%);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Medieval subtle noise/texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Typography elements */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+/* Heraldic Dividers */
+.heraldic-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.2rem auto;
+    max-width: 450px;
+    color: var(--gold-primary);
+}
+
+.heraldic-divider::before,
+.heraldic-divider::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
+}
+
+.heraldic-divider span {
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* ===================================================
+   HERO SECTION: The Grand Citadel
+   =================================================== */
 .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ff6b35 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white;
     position: relative;
-    padding: 2rem;
+    padding: 4rem 2rem;
+    background: 
+        radial-gradient(circle at 50% 30%, rgba(26, 34, 52, 0.8) 0%, rgba(9, 11, 15, 0.95) 80%),
+        linear-gradient(180deg, rgba(13, 15, 20, 0.4) 0%, #0d0f14 100%);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.2);
 }
 
-.hero::before {
+/* Corner filigree accents on Hero */
+.hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
-    animation: fadeInUp 1s ease-out;
+    max-width: 900px;
+    animation: medievalFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.logo {
-    width: 120px;
-    height: 120px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-    color: #1e3c72;
-    font-size: 1.2rem;
+/* Hero Titles */
+.realm-badge {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 0.4rem 1.4rem;
+    border-radius: 30px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-decorative);
+    font-size: 4.8rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+    letter-spacing: 4px;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 25px rgba(212, 175, 55, 0.35));
+    line-height: 1.1;
 }
 
-.hero h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
+.hero h2.institution-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #e5ded0;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.hero h3.dept-title {
+    font-family: var(--font-body);
+    font-size: 1.35rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-    opacity: 0.9;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    opacity: 0.95;
+    margin-bottom: 1.2rem;
 }
 
 .tagline {
-    font-size: 1.3rem;
-    font-weight: 400;
-    opacity: 0.8;
-    margin-bottom: 2rem;
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
 }
 
-/* About Section */
+/* Scroll decree button */
+.scroll-decree {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-primary);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    padding: 0.6rem 1.6rem;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 4px;
+    background: rgba(13, 15, 20, 0.7);
+    transition: all 0.3s ease;
+}
+
+.scroll-decree:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--gold-light);
+    box-shadow: var(--gold-glow);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* ===================================================
+   CHRONICLE (ABOUT) SECTION: The Illuminated Decree
+   =================================================== */
 .about {
-    padding: 5rem 2rem;
-    background: linear-gradient(to bottom, #f8f9fa, white);
-    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
 }
 
 .container {
@@ -93,215 +241,468 @@ body {
     margin: 0 auto;
 }
 
+.parchment-scroll {
+    max-width: 860px;
+    margin: 0 auto;
+    background: radial-gradient(ellipse at center, rgba(28, 33, 48, 0.9) 0%, rgba(16, 20, 30, 0.95) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 3.5rem 3rem;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 
+        0 15px 45px rgba(0, 0, 0, 0.6),
+        inset 0 0 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 1px 1px rgba(212, 175, 55, 0.2);
+}
+
+/* Corner ornamental brackets on scroll */
+.parchment-scroll::before,
+.parchment-scroll::after {
+    content: '✤';
+    position: absolute;
+    color: var(--gold-primary);
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+.parchment-scroll::before { top: 12px; left: 14px; }
+.parchment-scroll::after { bottom: 12px; right: 14px; }
+
+.section-label {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    margin-bottom: 0.5rem;
+}
+
 .about h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #1e3c72;
-    margin-bottom: 2rem;
-    animation: fadeInUp 0.8s ease-out;
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    text-align: center;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
 }
 
 .about p {
-    font-size: 1.2rem;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-}
-
-/* Events Section */
-.events {
-    padding: 5rem 2rem;
-    background: white;
-}
-
-.events h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #1e3c72;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    max-width: 780px;
+    margin: 1.5rem auto 0;
+    line-height: 2;
     text-align: center;
-    margin-bottom: 3rem;
+}
+
+.about p::first-letter {
+    font-family: var(--font-decorative);
+    font-size: 3.2rem;
+    float: left;
+    line-height: 0.85;
+    padding-right: 0.8rem;
+    padding-top: 0.2rem;
+    color: var(--gold-primary);
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* ===================================================
+   EVENTS SECTION: Grand Tournaments & Quests
+   =================================================== */
+.events {
+    padding: 6rem 2rem 7rem;
+    position: relative;
+}
+
+.events-header {
+    text-align: center;
+    margin-bottom: 4.5rem;
+}
+
+.events-header h2 {
+    font-family: var(--font-decorative);
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+    margin-bottom: 0.6rem;
+}
+
+.events-header p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
 }
 
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1260px;
     margin: 0 auto;
 }
 
+/* Medieval Tournament Challenge Cards */
 .event-card {
-    background: white;
-    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideInUp 0.6s ease-out forwards;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(8px);
 }
 
-.event-card:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.event-card:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.event-card:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-.event-card:nth-child(4) {
-    animation-delay: 0.4s;
+/* Medieval gold corner accents */
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold-gradient);
+    opacity: 0.8;
+    z-index: 5;
+    transition: height 0.3s ease;
 }
 
 .event-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.7);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(212, 175, 55, 0.2);
+    background: var(--bg-card-hover);
 }
 
-/* IMAGE AREA: keep 16:9 and show full image by default */
+.event-card:hover::before {
+    height: 4px;
+    box-shadow: 0 0 12px var(--gold-primary);
+}
+
+/* Event Image Framing */
 .event-image {
     width: 100%;
     aspect-ratio: 16 / 9;
-    /* keep 16:9 box */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #1e3c72, #ff6b35);
-    /* fallback / letterbox color */
+    background: #0d0f14;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
 }
 
-/* Make sure img fills the box but doesn't get cropped by default */
+.event-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
 .event-image img {
     width: 100%;
-    height: 130%;
-    object-fit: contain;
-    transition: transform 0.45s ease;
-    /* smooth zoom for hover */
-    display: block;
-}
-
-/* On hover: slight zoom and allow a small crop for animation */
-.event-card:hover .event-image img {
-    transform: scale(1.05);
+    height: 100%;
     object-fit: cover;
-    /* slight crop during hover to make zoom feel nicer */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    display: block;
+    filter: brightness(0.92) contrast(1.05);
 }
 
+.event-card:hover .event-image img {
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.1);
+}
+
+/* Category Badge over Image */
+.event-type-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(13, 15, 20, 0.85);
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-light);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem;
+    border-radius: 4px;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Event Content */
 .event-content {
-    padding: 2rem;
+    padding: 2.2rem 2rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .event-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1e3c72;
-    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--gold-light);
+    margin-bottom: 0.9rem;
+    line-height: 1.3;
+    letter-spacing: 1px;
 }
 
 .event-description {
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1.8rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    flex-grow: 1;
 }
 
+/* Coordinators Section: Heraldic Seal style */
 .coordinators {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(13, 15, 22, 0.6);
+    border-left: 3px solid var(--gold-primary);
+    border-radius: 0 6px 6px 0;
 }
 
 .coordinators h4 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    color: #1e3c72;
-    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-primary);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.coordinator-list {
-    color: #666;
+.coordinators h4::before {
+    content: '⚔';
     font-size: 0.9rem;
 }
 
+.coordinator-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #e0d8c7;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.coordinator-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.coordinator-list li:last-child {
+    margin-bottom: 0;
+}
+
+.coordinator-list li::before {
+    content: '✦';
+    font-size: 0.75rem;
+    color: var(--gold-primary);
+    opacity: 0.85;
+}
+
+/* Medieval Guild Action Button: Wax & Gold Seal */
 .register-btn {
-    display: inline-block;
-    background: linear-gradient(135deg, #ff6b35, #ff8c42);
-    color: white;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #1b2030 0%, #10131d 100%);
+    color: var(--gold-light);
+    padding: 0.9rem 1.8rem;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--gold-primary);
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.register-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.25), transparent);
+    transition: left 0.6s ease;
 }
 
 .register-btn:hover {
+    background: var(--gold-gradient);
+    color: #1a1405;
+    border-color: var(--gold-light);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
 }
 
-/* Footer */
+.register-btn:hover::before {
+    left: 100%;
+}
+
+.register-btn span.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.register-btn:hover span.btn-arrow {
+    transform: translateX(4px);
+}
+
+/* ===================================================
+   FOOTER: The Chronicler's Archive
+   =================================================== */
 .footer {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
+    background: #090b0f;
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    color: var(--text-muted);
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    max-width: 90%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.footer-logo-sigil {
+    font-size: 2rem;
+    color: var(--gold-primary);
+    margin-bottom: 1rem;
+    display: inline-block;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
 }
 
 .footer p {
-    opacity: 0.9;
-    font-size: 1rem;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
+.footer-subtitle {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(212, 175, 55, 0.7);
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+}
+
+/* ===================================================
+   ANIMATIONS & REVEALS
+   =================================================== */
+@keyframes medievalFadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(35px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================================
+   RESPONSIVE DESIGN (Clean & Tidy)
+   =================================================== */
+@media (max-width: 992px) {
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 4rem;
+    }
+    
+    .about h2,
+    .events-header h2 {
+        font-size: 2.6rem;
+    }
+    
+    .events-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 1.5rem;
     }
 
-    .hero h2 {
-        font-size: 1.4rem;
+    .hero h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
     }
 
-    .tagline {
+    .hero h2.institution-title {
+        font-size: 1.3rem;
+    }
+
+    .hero h3.dept-title {
         font-size: 1.1rem;
     }
 
+
+    .about {
+        padding: 4rem 1.5rem;
+    }
+
+    .parchment-scroll {
+        padding: 2.5rem 1.5rem;
+    }
+
     .about h2,
-    .events h2 {
+    .events-header h2 {
         font-size: 2.2rem;
     }
 
@@ -309,52 +710,36 @@ body {
         font-size: 1.1rem;
     }
 
+    .events {
+        padding: 4rem 1.5rem;
+    }
+
     .events-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .event-content {
-        padding: 1.5rem;
-    }
-
-    .logo {
-        width: 100px;
-        height: 100px;
+        gap: 2rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 1rem;
-    }
-
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
     }
 
-    .hero h2 {
-        font-size: 1.2rem;
+    .hero h2.institution-title {
+        font-size: 1.15rem;
     }
 
-    .about,
-    .events {
-        padding: 3rem 1rem;
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .realm-badge {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        padding: 0.35rem 1rem;
     }
 
     .event-content {
-        padding: 1rem;
+        padding: 1.6rem 1.4rem;
     }
-}
-
-/* Scroll animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
 }

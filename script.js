@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in').forEach(el => {
-        sectionObserver.observe(el);
-    });
+    const revealSections = document.querySelectorAll('.fade-in');
+    if ('IntersectionObserver' in window) {
+        revealSections.forEach(el => {
+            el.classList.add('reveal-pending');
+            sectionObserver.observe(el);
+        });
+    }
 
     // 2. Staggered card reveals
     const cardObserver = new IntersectionObserver((entries, observer) => {
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
 
     const eventsGrid = document.querySelector('.events-grid');
-    if (eventsGrid) {
+    if (eventsGrid && 'IntersectionObserver' in window) {
         // Initially prepare cards for staggered appearance
         eventsGrid.querySelectorAll('.event-card').forEach(card => {
             card.style.opacity = '0';

@@ -26,34 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Staggered card reveals
-    const cardObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const cards = entry.target.querySelectorAll('.event-card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 120);
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    const eventsGrid = document.querySelector('.events-grid');
-    if (eventsGrid && 'IntersectionObserver' in window) {
-        // Initially prepare cards for staggered appearance
-        eventsGrid.querySelectorAll('.event-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(25px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)';
-        });
-        cardObserver.observe(eventsGrid);
-    }
-
-    // 3. Smooth scrolling for internal anchor links (like "Enter the Arena")
+    // 2. Smooth scrolling for internal anchor links (like "Enter the Arena")
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -70,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Subtle 3D tilt & sheen effect on tournament cards
+    // 3. Subtle 3D tilt & sheen effect on tournament cards
     const cards = document.querySelectorAll('.event-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
